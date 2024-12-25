@@ -119,7 +119,7 @@ func (cf *CmdFlags) addSecret(secrets *Secrets) {
 		return
 	}
 
-	// Add the new secret
+	// Call the add method to add the new secret
 	if err := secrets.Add(title, username, password, note, email, website); err != nil {
 		fmt.Println("Error adding secret:", err)
 		return
@@ -138,6 +138,7 @@ func getPassword(secrets *Secrets) (string, error) {
 
 	for {
 		char, key, err := keyboard.GetKey()
+
 		if err != nil {
 			return "", fmt.Errorf("error reading input: %w", err)
 		}

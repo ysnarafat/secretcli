@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"math/rand"
 	"os"
 	"strconv"
 	"time"
-	"math/rand"
 
 	"github.com/aquasecurity/table"
 	"github.com/mahinops/secretcli/internal/utils"
@@ -15,7 +15,7 @@ import (
 
 const (
 	// Define the characters to use in the password
-	letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?/"
+	letterBytes    = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?/"
 	passwordLength = 18
 )
 
@@ -121,19 +121,10 @@ func (secrets *Secrets) Export() error {
 }
 
 func (secrets *Secrets) Suggest() string {
-	// Directly marshal the *secrets structure into JSON
-
-	//fmt.Printf("Sugggesting %s", "abcd")
-
-
-	// Seed the random number generator
 	rand.NewSource(time.Now().UnixNano())
-
-	// Create a slice to hold the password characters
 	password := make([]byte, passwordLength)
 
 	for i := range password {
-		// Pick a random character from the letterBytes string
 		password[i] = letterBytes[rand.Intn(len(letterBytes))]
 	}
 
