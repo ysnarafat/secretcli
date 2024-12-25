@@ -60,6 +60,7 @@ func main() {
 		userCmdFlag.Execute(&user, authFlagSet)
 		userStorage.Save(user)
 	} else if command == "secret" { // Handle secret command
+		fmt.Println("'secret'.")
 		secretFlagSet.Parse(os.Args[2:]) // Parse flags for 'secret'
 		secrets := secret.Secrets{}
 		secretStorage := storage.NewStorage[secret.Secrets](secretCLIPath)
