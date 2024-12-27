@@ -150,17 +150,14 @@ func getPassword(secrets *Secrets) (string, error) {
 		if key == keyboard.KeyBackspace {
 			if len(password) > 0 {
 				password = password[:len(password)-1]
-				fmt.Printf("\r" + "Enter Password (press Tab for a suggested password): " + password)
-				fmt.Print("\033[K")
+				printPassword(password)
 			}
-
 			continue
 		}
 
 		if key == keyboard.KeyTab {
 			password = secrets.Suggest()
-			fmt.Printf("\rEnter Password (press Tab for a suggested password): %s", password)
-			fmt.Print("\033[K")
+			printPassword(password)
 			continue
 		}
 
@@ -171,6 +168,11 @@ func getPassword(secrets *Secrets) (string, error) {
 	}
 
 	return password, nil
+}
+
+func printPassword(password string) {
+	fmt.Printf("\rEnter Password (press Tab for a suggested password): %s", password)
+	fmt.Print("\033[K")
 }
 
 // Edit an existing secret
